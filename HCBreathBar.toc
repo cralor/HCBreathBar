@@ -1,0 +1,7 @@
+## Interface: 11403
+## Title: HCBreathBar
+## Author: cralor
+## Version: 0.1
+## Notes: Larger breath bar with countdown and audio alerts before death
+
+HCBreathBar.lua
