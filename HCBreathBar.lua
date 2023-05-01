@@ -19,6 +19,14 @@ alert.text:SetText("Do NOT use SPACEBAR to surface.") -- AVOID DISCONNECTING FRO
 alert.text:SetPoint("CENTER", 0, 0)
 alert:Hide()
 
+alert:RegisterEvent("MIRROR_TIMER_STOP")
+
+local function onEvent(self, event, ...)
+    if event == "MIRROR_TIMER_STOP" then
+        alert:Hide()
+    end
+end
+
 for index = 1, MIRRORTIMER_NUMTIMERS, 1 do
     local frame = _G["MirrorTimer"..index]
     local text = _G[frame:GetName().."Text"]
@@ -27,8 +35,6 @@ for index = 1, MIRRORTIMER_NUMTIMERS, 1 do
         if (self.timer == "BREATH") then
             if InCombatLockdown() then
                 alert:Show()
-            else
-                alert:Hide()
             end
             frame:SetScale(BREATH_BAR_SCALE / 100)
             local Min = math.floor(self.value / 60)
@@ -49,3 +55,5 @@ for index = 1, MIRRORTIMER_NUMTIMERS, 1 do
         end
     end)
 end
+
+alert:SetScript("OnEvent", onEvent)
